@@ -348,9 +348,9 @@
   }
   @media (max-width: 759px) {
     .card p {
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.4;
-      margin-bottom: 0;
+      margin-bottom: 10px;
       max-width: none;
     }
   }
@@ -500,8 +500,7 @@
         <div class="card-body">
           <span class="pill"><span class="pill-icon">📍</span> California</span>
           <h2>Inside California</h2>
-          <p class="desktop-only">Direct from our San Diego distillery — only available to California addresses.</p>
-          <p class="mobile-only">Ships from our San Diego distillery.</p>
+          <p>Direct from our San Diego distillery — only available to California addresses.</p>
         </div>
         <div class="card-cta">
           <div class="perk">FREE Shipping</div>
@@ -518,8 +517,7 @@
         <div class="card-body">
           <span class="pill"><span class="pill-icon">🇺🇸</span> Outside California</span>
           <h2>Outside California</h2>
-          <p class="desktop-only">Our nationwide store ships to addresses outside of California.<br><span class="excl">*Excludes AL, AK, AR, DE, HI, MS, OR, SD, UT, WV.</span></p>
-          <p class="mobile-only">Ships nationwide.<br><span class="excl">*Excludes AL, AK, AR, DE, HI, MS, OR, SD, UT, WV.</span></p>
+          <p>Our nationwide store ships to addresses outside of California, shipped from our third-party partner.<br><span class="excl">*Excludes AL, AK, AR, DE, HI, MS, OR, SD, UT, WV.</span></p>
         </div>
         <div class="card-cta">
           <div class="perk">15% OFF</div>
@@ -559,13 +557,7 @@
     <p class="helper">Must be 21+ to purchase. The California store ships only to California addresses; the nationwide store ships to all other eligible states.</p>
 
     <style>
-      /* Show/hide copy variants by viewport */
-      .mobile-only { display: none; }
-      .desktop-only { display: block; }
-      @media (max-width: 759px) {
-        .mobile-only { display: block; }
-        .desktop-only { display: none; }
-      }
+      /* (mobile/desktop copy variants removed — single paragraph now)*/
       /* On desktop, the card-body and card-cta wrappers are layout-neutral */
       @media (min-width: 760px) {
         .card .card-body, .card .card-cta {
