@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Club Kokomo Spirits — Choose Your Shipping Destination</title>
+<meta name="description" content="Pick your destination — California shoppers ship free from our San Diego distillery. Outside California? Get 15% off shipped nationwide." />
+
+<!-- Open Graph / social preview -->
+<meta property="og:title" content="Club Kokomo Spirits — Special Offer" />
+<meta property="og:description" content="Free shipping in California · 15% off nationwide. Tap to shop." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="logo.png" />
+
+<link rel="icon" type="image/png" href="logo.png" />
+
+<!-- Fonts: elegant serif + script vibe to echo the Club Kokomo logo -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet" />
+
+<style>
+  /* =========================================================
+     EDIT THESE TWO VALUES TO UPDATE YOUR DISCOUNT CODES.
+     They are read by the JS at the bottom — no other changes needed.
+     ========================================================= */
+  /* (codes live in <script data-config> below — kept here as a comment
+     for visibility while editing the file) */
+
+  :root {
+    --navy: #0f2340;
+    --navy-deep: #0a172c;
+    --coral: #e2725b;
+    --coral-bright: #ed8267;
+    --sand: #f5ecdc;
+    --cream: #faf4e8;
+    --gold: #d9a441;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: var(--cream);
+    background: var(--navy-deep);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Background: layered gradient + soft palm silhouettes via SVG data-uri */
+  .bg {
+    position: fixed; inset: 0; z-index: -2;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(226,114,91,0.25), transparent 55%),
+      radial-gradient(ellipse at 80% 100%, rgba(217,164,65,0.18), transparent 50%),
+      linear-gradient(180deg, #0f2340 0%, #0a172c 60%, #060f1f 100%);
+  }
+  .bg::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 12% 22%, rgba(255,255,255,0.05) 0 1px, transparent 2px),
+      radial-gradient(circle at 78% 38%, rgba(255,255,255,0.04) 0 1px, transparent 2px),
+      radial-gradient(circle at 35% 78%, rgba(255,255,255,0.05) 0 1px, transparent 2px),
+      radial-gradient(circle at 92% 12%, rgba(255,255,255,0.04) 0 1px, transparent 2px);
+    background-size: 600px 600px;
+    opacity: .6;
+  }
+
+  .wrap {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px 28px;
+    text-align: center;
+  }
+  @media (max-width: 759px) {
+    .wrap {
+      min-height: 100dvh;
+      padding: 16px 14px max(16px, env(safe-area-inset-bottom));
+      justify-content: flex-start;
+      gap: 0;
+    }
+  }
+
+  .logo {
+    height: auto;
+    display: block;
+  }
+  .logo-stacked   { width: min(360px, 78vw); }
+  .logo-horizontal { width: 100%; max-width: 360px; height: auto; }
+
+  /* Show horizontal on mobile, stacked on desktop */
+  .logo-horizontal { display: block; }
+  .logo-stacked    { display: none; }
+  @media (min-width: 760px) {
+    .logo-horizontal { display: none; }
+    .logo-stacked    { display: block; }
+  }
+
+  /* Cream frame around the logo (looks like a printed badge) */
+  .logo-frame {
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 22px 28px 18px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.6);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (max-width: 759px) {
+    .logo-frame {
+      padding: 8px 14px;
+      margin-bottom: 4px;
+      border-radius: 10px;
+      width: min(100%, 260px);
+    }
+    .logo-horizontal { max-width: 220px; }
+  }
+
+  .eyebrow {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--coral);
+    font-size: clamp(22px, 4.6vw, 34px);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  @media (max-width: 759px) {
+    .eyebrow { font-size: 24px; margin-bottom: 8px; }
+  }
+  @media (max-width: 380px) {
+    .eyebrow { font-size: 22px; margin-bottom: 6px; }
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: clamp(26px, 6vw, 52px);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    max-width: 760px;
+  }
+  @media (max-width: 759px) {
+    h1 { font-size: 26px; margin-bottom: 6px; }
+  }
+  @media (max-width: 380px) {
+    h1 { font-size: 23px; }
+  }
+
+  .sub {
+    font-size: clamp(13px, 2.2vw, 17px);
+    color: rgba(250,244,232,0.78);
+    max-width: 560px;
+    line-height: 1.45;
+    margin-bottom: 28px;
+  }
+  @media (min-width: 760px) {
+    .sub { margin-bottom: 36px; }
+  }
+  @media (max-width: 759px) {
+    .sub { font-size: 14px; margin-bottom: 12px; line-height: 1.4; }
+  }
+  @media (max-width: 380px) {
+    .sub { font-size: 13px; margin-bottom: 10px; }
+  }
+
+  /* Feature trust row — circular icon badges */
+  .features {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 28px;
+    width: 100%;
+    max-width: 760px;
+    margin: 18px 0 22px;
+  }
+  .feature {
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  .feature-icon {
+    width: 64px; height: 64px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(226,114,91,0.55);
+    background: rgba(226,114,91,0.08);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .feature svg {
+    width: 30px; height: 30px;
+    color: var(--coral);
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .feature-text {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--cream);
+    letter-spacing: 0.01em;
+  }
+  @media (min-width: 760px) {
+    .features { gap: 56px; margin: 24px 0 32px; }
+    .feature-icon { width: 76px; height: 76px; }
+    .feature svg { width: 36px; height: 36px; }
+    .feature-text { font-size: 14px; }
+  }
+  @media (max-width: 759px) {
+    .features { gap: 18px; margin: 14px 0 14px; }
+    .feature  { gap: 8px; }
+    .feature-icon { width: 54px; height: 54px; border-width: 1.25px; }
+    .feature svg { width: 26px; height: 26px; }
+    .feature-text { font-size: 11.5px; line-height: 1.2; }
+  }
+  @media (max-width: 380px) {
+    .features { gap: 14px; }
+    .feature-icon { width: 48px; height: 48px; }
+    .feature svg { width: 22px; height: 22px; }
+    .feature-text { font-size: 11px; }
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+    max-width: 880px;
+    margin-bottom: 16px;
+  }
+  @media (min-width: 760px) {
+    .cards { grid-template-columns: 1fr 1fr; gap: 22px; }
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 26px 28px;
+    border-radius: 22px;
+    text-decoration: none;
+    color: inherit;
+    background: linear-gradient(165deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(255,255,255,0.10);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  @media (max-width: 759px) {
+    .card {
+      padding: 16px 16px;
+      border-radius: 18px;
+      flex-direction: row;
+      align-items: center;
+      text-align: left;
+      gap: 14px;
+    }
+    .card .card-body {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .card .card-cta {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+    }
+    .card h2 {
+      /* On mobile, the pill already says California / Outside California —
+         hide the redundant heading and let the perk be the focal point. */
+      display: none;
+    }
+  }
+  .card:focus-visible {
+    outline: 3px solid var(--coral);
+    outline-offset: 3px;
+  }
+  .card::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at var(--mx,50%) var(--my,0%), rgba(226,114,91,0.18), transparent 60%);
+    opacity: 0;
+    transition: opacity .3s ease;
+    pointer-events: none;
+  }
+  .card:hover, .card:focus-visible {
+    transform: translateY(-4px);
+    border-color: rgba(226,114,91,0.55);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.45), 0 0 0 1px rgba(226,114,91,0.25);
+    background: linear-gradient(165deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 100%);
+  }
+  .card:hover::before, .card:focus-visible::before { opacity: 1; }
+  .card:active { transform: translateY(-1px); }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--coral);
+    background: rgba(226,114,91,0.14);
+    border: 1px solid rgba(226,114,91,0.35);
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 759px) {
+    .pill {
+      font-size: 10.5px;
+      padding: 4px 10px;
+      gap: 5px;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      white-space: nowrap;
+    }
+    .pill .pill-icon { font-size: 12px; }
+  }
+
+  .card h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: clamp(15px, 3.4vw, 28px);
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  @media (max-width: 759px) {
+    .card h2 { font-size: 19px; line-height: 1.15; margin-bottom: 4px; }
+  }
+
+  .card p {
+    color: rgba(250,244,232,0.75);
+    font-size: 15px;
+    line-height: 1.55;
+    margin-bottom: 22px;
+    max-width: 32ch;
+  }
+  @media (max-width: 759px) {
+    .card p {
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 0;
+      max-width: none;
+    }
+  }
+  .card p .excl {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: rgba(250,244,232,0.55);
+    letter-spacing: 0.02em;
+  }
+  @media (max-width: 759px) {
+    .card p .excl { font-size: 10.5px; margin-top: 4px; line-height: 1.3; }
+  }
+
+  .perk {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 4.6vw, 38px);
+    font-weight: 800;
+    color: var(--cream);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  @media (max-width: 759px) {
+    .perk {
+      font-size: 26px;
+      margin-bottom: 0;
+      white-space: nowrap;
+      line-height: 1.05;
+    }
+  }
+  .perk-sub {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+  }
+  @media (max-width: 759px) {
+    .perk-sub { font-size: 10.5px; letter-spacing: 0.12em; margin: 2px 0 12px; }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: auto;
+    padding: 14px 18px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    background: var(--coral);
+    color: white;
+    border: none;
+    text-decoration: none;
+    transition: background .2s ease, transform .15s ease;
+  }
+  @media (max-width: 759px) {
+    .btn {
+      width: auto;
+      padding: 12px 20px;
+      font-size: 14.5px;
+      gap: 6px;
+      white-space: nowrap;
+      margin-top: 0;
+    }
+    .btn .arrow { width: 14px; height: 14px; }
+  }
+  .card:hover .btn { background: var(--coral-bright); }
+  .btn svg { transition: transform .2s ease; }
+  .card:hover .btn svg { transform: translateX(4px); }
+
+  .arrow {
+    width: 18px; height: 18px;
+  }
+
+  .helper {
+    margin-top: 28px;
+    font-size: 13px;
+    color: rgba(250,244,232,0.55);
+    max-width: 560px;
+    line-height: 1.55;
+  }
+  @media (max-width: 759px) {
+    .helper { margin-top: 10px; font-size: 10px; line-height: 1.35; }
+  }
+
+  .footer {
+    margin-top: 36px;
+    font-size: 12px;
+    color: rgba(250,244,232,0.45);
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 759px) {
+    .footer { margin-top: 6px; font-size: 9.5px; }
+  }
+  .footer a { color: rgba(250,244,232,0.7); text-decoration: none; }
+  .footer a:hover { color: var(--coral); }
+
+  .divider {
+    display: flex; align-items: center; gap: 14px;
+    color: rgba(250,244,232,0.35);
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    margin: 4px 0 28px;
+    width: 100%; max-width: 360px;
+  }
+  .divider::before, .divider::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(250,244,232,0.25), transparent);
+  }
+
+  /* Subtle entrance animation */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .logo-frame, .eyebrow, h1, .sub, .cards, .helper { animation: rise .7s ease both; }
+  .eyebrow  { animation-delay: .05s; }
+  h1        { animation-delay: .12s; }
+  .sub      { animation-delay: .18s; }
+  .cards    { animation-delay: .26s; }
+  .helper   { animation-delay: .36s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <div class="logo-frame">
+      <img class="logo logo-stacked"    src="logo.png"            alt="Club Kokomo Spirits" />
+      <img class="logo logo-horizontal" src="logo-horizontal.png" alt="Club Kokomo Spirits" />
+    </div>
+
+    <div class="eyebrow">Experience Harmony in Flavor</div>
+    <h1>Where are we shipping your favorite rum?</h1>
+    <p class="sub">Pick your destination below — we'll send you to the right shop and apply your offer at checkout automatically.</p>
+
+    <div class="cards">
+      <!-- CALIFORNIA -->
+      <a class="card" id="card-ca" href="#" data-store="ca" aria-label="Shop the California store with free shipping">
+        <div class="card-body">
+          <span class="pill"><span class="pill-icon">📍</span> California</span>
+          <h2>Inside California</h2>
+          <p class="desktop-only">Direct from our San Diego distillery — only available to California addresses.</p>
+          <p class="mobile-only">Ships from our San Diego distillery.</p>
+        </div>
+        <div class="card-cta">
+          <div class="perk">FREE Shipping</div>
+          <div class="perk-sub">Applied at checkout</div>
+          <span class="btn">
+            Shop California
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- NATIONAL -->
+      <a class="card" id="card-us" href="#" data-store="us" aria-label="Shop the national store with 15 percent off">
+        <div class="card-body">
+          <span class="pill"><span class="pill-icon">🇺🇸</span> Outside California</span>
+          <h2>Outside California</h2>
+          <p class="desktop-only">Our nationwide store ships to addresses outside of California.<br><span class="excl">*Excludes AL, AK, AR, DE, HI, MS, OR, SD, UT, WV.</span></p>
+          <p class="mobile-only">Ships nationwide.<br><span class="excl">*Excludes AL, AK, AR, DE, HI, MS, OR, SD, UT, WV.</span></p>
+        </div>
+        <div class="card-cta">
+          <div class="perk">15% OFF</div>
+          <div class="perk-sub">Applied at checkout</div>
+          <span class="btn">
+            Shop Nationwide
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <div class="features" aria-label="What makes our rum different">
+      <div class="feature">
+        <span class="feature-icon">
+          <!-- Star = artisan craft -->
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.6 4.5 4.7.4-3.6 3 1.1 4.6L12 13l-3.8 2.5 1.1-4.6L5.7 7.9l4.7-.4L12 3z"/><path d="M6 19c2 1 4 1.5 6 1.5S16 20 18 19"/></svg>
+        </span>
+        <div class="feature-text">Artisan<br>Crafted Rum</div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">
+          <!-- Trophy -->
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v3a5 5 0 01-10 0V4z"/><path d="M7 6H4a3 3 0 003 3M17 6h3a3 3 0 01-3 3"/><path d="M9 14h6M10 14v3a2 2 0 002 2h0a2 2 0 002-2v-3M8 21h8"/></svg>
+        </span>
+        <div class="feature-text">Award<br>Winning</div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">
+          <!-- Leaf = additive free -->
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4c0 8-4.5 13-12 13a8 8 0 010-9C12 4 16 4 20 4z"/><path d="M4 20c2-4 6-7 12-9"/></svg>
+        </span>
+        <div class="feature-text">100% Additive<br>Free</div>
+      </div>
+    </div>
+
+    <p class="helper">Must be 21+ to purchase. The California store ships only to California addresses; the nationwide store ships to all other eligible states.</p>
+
+    <style>
+      /* Show/hide copy variants by viewport */
+      .mobile-only { display: none; }
+      .desktop-only { display: block; }
+      @media (max-width: 759px) {
+        .mobile-only { display: block; }
+        .desktop-only { display: none; }
+      }
+      /* On desktop, the card-body and card-cta wrappers are layout-neutral */
+      @media (min-width: 760px) {
+        .card .card-body, .card .card-cta {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          width: 100%;
+        }
+      }
+    </style>
+
+    <div class="footer">© <span id="yr"></span> Club Kokomo Spirits, Inc. · <a href="https://clubkokomospirits.com" target="_blank" rel="noopener">clubkokomospirits.com</a></div>
+  </main>
+
+<!--
+  ============================================================================
+  CONFIG — edit your discount codes here. Nothing else needs to change.
+  ============================================================================
+-->
+<script data-config>
+  window.KOKOMO_CONFIG = {
+    california: {
+      // California / San Diego distillery store
+      url: "https://clubkokomospirits.com/pages/shopcalifornia",
+      // Free-shipping discount code. Replace with your real code.
+      discountCode: "CA_FREESHIP"
+    },
+    national: {
+      // Nationwide Shopify store
+      url: "https://shop.clubkokomospirits.com/",
+      // 15% off discount code. Replace with your real code.
+      discountCode: "NATIONAL15"
+    }
+  };
+</script>
+
+<script>
+  (function () {
+    var cfg = window.KOKOMO_CONFIG;
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    /**
+     * Shopify supports applying a discount via URL with /discount/CODE.
+     * The browser is then redirected on to the original target page,
+     * with the code stored in the cart session for checkout.
+     *   https://shop.example.com/discount/CODE?redirect=/collections/all
+     */
+    function buildShopifyDiscountUrl(storeUrl, code) {
+      try {
+        var u = new URL(storeUrl);
+        var redirectPath = (u.pathname && u.pathname !== "/") ? u.pathname + u.search : "/";
+        // /discount/CODE on the same origin, with redirect to the intended page
+        return u.origin + "/discount/" + encodeURIComponent(code) +
+               "?redirect=" + encodeURIComponent(redirectPath);
+      } catch (e) {
+        // Fallback: just send them to the store
+        return storeUrl;
+      }
+    }
+
+    function go(which) {
+      var entry = (which === "ca") ? cfg.california : cfg.national;
+      var url = entry.discountCode
+        ? buildShopifyDiscountUrl(entry.url, entry.discountCode)
+        : entry.url;
+      window.location.href = url;
+    }
+
+    // Wire up cards
+    document.querySelectorAll('.card').forEach(function (card) {
+      var store = card.getAttribute('data-store') === 'ca' ? 'ca' : 'us';
+
+      card.addEventListener('click', function (e) {
+        e.preventDefault();
+        go(store);
+      });
+
+      // Keyboard accessibility (Enter / Space)
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          go(store);
+        }
+      });
+
+      // Subtle pointer-glow effect
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top)  / r.height * 100) + '%');
+      });
+    });
+  })();
+</script>
+</body>
+</html>
